@@ -1,0 +1,8 @@
+[syslog<% if @target_group %>:<%= @target_group %><% end %>]
+    server = <%= @server %>
+<% if @defaultGroup %>    defaultGroup = <%= @defaultGroup %>
+<% end %><% if @type %>    type = <%= @type %>
+<% end %><% if @priority %>    priority = <%= @priority %>
+<% end %><% if @syslogSourceType %>    syslogSourceType = <%= @syslogSourceType %>
+<% end %><% if @timestampformat %>    timestampformat = <%= @timestampformat %>
+<% end %> 
