@@ -1,5 +1,10 @@
+# Creates the [tcp://] fragment of the splunk inputs.conf file
+#
+# Based on the inputs.conf.spec.  See at:
+# (http://docs.splunk.com/Documentation/Splunk/6.0/admin/Inputsconf)
+
 define splunk::input::tcp ( $port,
-  $remote_server       = "", 
+  $remote_server       = '',
   $host                = undef,
   $index               = undef,
   $source              = undef,
@@ -16,8 +21,8 @@ define splunk::input::tcp ( $port,
   include splunk
 
   realize Concat['inputs.conf']
-  concat::fragment { "tcp-$title":
-    target => 'inputs.conf',
+  concat::fragment { "tcp-${title}":
+    target  => 'inputs.conf',
     content => template( 'splunk/inputs.conf/tcp.erb' )
   }
 }

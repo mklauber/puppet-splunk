@@ -1,7 +1,12 @@
-define splunk::output::tcpout ( 
+# Creates the Global [tcpout] stanza in splunk's outputs.conf
+#
+# Based on the outputs.conf.spec.  See at:
+# (http://docs.splunk.com/Documentation/Splunk/latest/Admin/Outputsconf)
+
+define splunk::output::tcpout (
   $defaultGroup = undef,
   $indexAndForward = undef,
-  
+  #----Common Settings----
   $sendCookedData              = undef,
   $heartbeatFrequency          = undef,
   $blockOnCloning              = undef,
@@ -23,7 +28,7 @@ define splunk::output::tcpout (
   $writeTimeout                = undef,
   $dnsResolutionInterval       = undef,
   $forceTimebasedAutoLB        = undef,
-  #----Automatic Load-Balancing---- 
+  #----Automatic Load-Balancing----
   $autoLB                      = undef,
   $autoLBFrequency             = undef,
   $sslPassword                 = undef,
@@ -37,17 +42,15 @@ define splunk::output::tcpout (
   $useACK                      = undef
 ) {
   include splunk
-  
+
   if $indexAndForward != undef
     require Package['splunk']
   end
-  
-  
 
   realize Concat['outputs.conf']
-  concat::fragment { "tcpout":
+  concat::fragment { 'tcpout':
     target  => 'outputs.conf',
     order   => 01,
-    content => template( 'splunk/outputs.conf/tcp.erb' )
+    content => template( 'splunk/outputs.conf/tcpout.erb' )
   }
 }

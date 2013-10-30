@@ -1,4 +1,8 @@
-define splunk::input::default ( $path, 
+# Creates the [default] fragment of the splunk inputs.conf file
+#
+# Based on the inputs.conf.spec.  See at:
+# (http://docs.splunk.com/Documentation/Splunk/6.0/admin/Inputsconf)
+define splunk::input::default (
   $host       = undef,
   $index      = undef,
   $source     = undef,
