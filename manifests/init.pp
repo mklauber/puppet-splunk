@@ -1,3 +1,3 @@
-class Splunk ()
-  
-end
+class splunk {
+    notify {"applied class splunk": }  
+}
