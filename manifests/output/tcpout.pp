@@ -43,9 +43,9 @@ define splunk::output::tcpout (
 ) {
   include splunk
 
-  if $indexAndForward != undef
+  if $indexAndForward != undef {
     require Package['splunk']
-  end
+  }
 
   realize Concat['outputs.conf']
   concat::fragment { 'tcpout':

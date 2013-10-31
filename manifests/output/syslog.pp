@@ -17,9 +17,9 @@ define splunk::output::syslog ( $server,
   include splunk
   require Package['splunk']
 
-  if ($defaultGroup != undef and $target_group != undef)
+  if ($defaultGroup != undef and $target_group != undef) {
     fail('defaultGroup and target_group cannot both be set.')
-  end
+  }
 
   realize Concat['outputs.conf']
   concat::fragment { "syslog-${title}":
