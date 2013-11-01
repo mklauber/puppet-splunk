@@ -6,9 +6,8 @@
 # == Parameters
 #
 
-class splunk::server ( $basedir='/opt/splunk') {
+class splunk::server ( $basedir='/opt/splunk') inherits splunk {
 
-  include splunk
   package { 'splunk':
     ensure => present,
     before => Exec['create_service']
@@ -19,17 +18,14 @@ class splunk::server ( $basedir='/opt/splunk') {
     creates  => '/etc/init.d/splunk',
   }
 
-  @concat { 'inputs.conf':
+  Concat ['inputs.conf'] {
     path   => "${basedir}/etc/system/local/inputs.conf",
-    notify => Service['splunk']
   }
-  @concat { 'outputs.conf':
+  Concat ['outputs.conf'] {
     path   => "${basedir}/etc/system/local/outputs.conf",
-    notify => Service['splunk']
   }
-  @concat { 'props.conf':
+  Concat ['props.conf'[ }
     path   => "${basedir}/etc/system/local/props.conf",
-    notify => Service['splunk']
   }
 }
 

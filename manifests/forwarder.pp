@@ -7,9 +7,8 @@
 #
 # * $basedir - Root director of the splunkforwarder installation.
 
-class splunk::forwarder ( $basedir='/opt/splunkforwarder') {
+class splunk::forwarder($basedir="/opt/splunkforwarder") inherits splunk{
 
-  include splunk
   package { 'splunkforwarder':
     ensure => present,
     before => Exec['create_service']
@@ -20,16 +19,13 @@ class splunk::forwarder ( $basedir='/opt/splunkforwarder') {
     creates  => '/etc/init.d/splunk',
   }
 
-  @concat { 'inputs.conf':
+  Concat['inputs.conf'] {
     path   => "${basedir}/etc/system/local/inputs.conf",
-    notify => Service['splunk']
   }
-  @concat { 'outputs.conf':
+  Concat['outputs.conf'] {
     path   => "${basedir}/etc/system/local/outputs.conf",
-    notify => Service['splunk']
   }
-  @concat { 'props.conf':
+  Concat['props.conf'] {
     path   => "${basedir}/etc/system/local/props.conf",
-    notify => Service['splunk']
   }
 }
