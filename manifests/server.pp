@@ -24,7 +24,7 @@ class splunk::server ( $basedir='/opt/splunk') inherits splunk {
   Concat ['outputs.conf'] {
     path   => "${basedir}/etc/system/local/outputs.conf",
   }
-  Concat ['props.conf'[ }
+  Concat ['props.conf'] {
     path   => "${basedir}/etc/system/local/props.conf",
   }
 }
