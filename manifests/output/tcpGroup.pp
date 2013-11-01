@@ -30,7 +30,6 @@ define splunk::output::tcpGroup ( $target_group,
   $dnsResolutionInterval       = undef,
   $forceTimebasedAutoLB        = undef,
   #----Automatic Load-Balancing----
-  $autoLB                      = undef,
   $autoLBFrequency             = undef,
   $sslPassword                 = undef,
   $sslCertPath                 = undef,
@@ -43,6 +42,11 @@ define splunk::output::tcpGroup ( $target_group,
   $useACK                      = undef
 ) {
   include splunk
+
+  # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
+  if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
+    fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
+  }
 
   realize Concat['outputs.conf']
   concat::fragment { "tcpGroup-${title}":

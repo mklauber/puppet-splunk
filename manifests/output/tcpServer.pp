@@ -29,7 +29,6 @@ define splunk::output::tcpServer ( $ip_address,
   $dnsResolutionInterval       = undef,
   $forceTimebasedAutoLB        = undef,
   #----Automatic Load-Balancing----
-  $autoLB                      = undef,
   $autoLBFrequency             = undef,
   $sslPassword                 = undef,
   $sslCertPath                 = undef,
@@ -43,6 +42,11 @@ define splunk::output::tcpServer ( $ip_address,
 ) {
   include splunk
 
+  # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
+  if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
+    fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
+  }
+  
   realize Concat['outputs.conf']
   concat::fragment { "tcpServer-${title}":
     target  => 'outputs.conf',

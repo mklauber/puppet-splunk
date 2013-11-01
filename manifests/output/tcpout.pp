@@ -29,7 +29,6 @@ define splunk::output::tcpout (
   $dnsResolutionInterval       = undef,
   $forceTimebasedAutoLB        = undef,
   #----Automatic Load-Balancing----
-  $autoLB                      = undef,
   $autoLBFrequency             = undef,
   $sslPassword                 = undef,
   $sslCertPath                 = undef,
@@ -45,6 +44,11 @@ define splunk::output::tcpout (
 
   if $indexAndForward != undef {
     require Package['splunk']
+  }
+
+    # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
+  if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
+    fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
   }
 
   realize Concat['outputs.conf']
