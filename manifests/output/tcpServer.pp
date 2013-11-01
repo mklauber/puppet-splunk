@@ -46,7 +46,7 @@ define splunk::output::tcpServer ( $ip_address,
   if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
     fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
   }
-  
+
   realize Concat['outputs.conf']
   concat::fragment { "tcpServer-${title}":
     target  => 'outputs.conf',
