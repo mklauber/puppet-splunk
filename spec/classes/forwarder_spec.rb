@@ -8,10 +8,8 @@ describe 'splunk::forwarder', :type => 'class' do
     it {
       should include_class( 'splunk::forwarder' )
 
-      should contain_package('splunkforwarder')
-      .with( { 'name' => 'splunkforwarder' } ) 
-      should contain_service('splunk')
-      .with( { 'name' => 'splunk' } )
+      should contain_package('splunkforwarder').with('name' => 'splunkforwarder' ) 
+      should contain_service('splunk').with( 'name' => 'splunk' )
 
       }
   end
