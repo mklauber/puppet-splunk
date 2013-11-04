@@ -10,10 +10,10 @@ class splunk::server ( $basedir='/opt/splunk') inherits splunk {
 
   package { 'splunk':
     ensure => present,
-    before => Exec['create_service']
+    before => Exec['splunk_service']
   }
 
-  exec { 'create_service':
+  exec { 'splunk_service':
     command  => "${basedir}/bin/splunk enable boot-start --accept-license --answer-yes --no-prompt",
     creates  => '/etc/init.d/splunk',
   }

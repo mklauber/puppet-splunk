@@ -7,7 +7,7 @@ class splunk {
 
   service { 'splunk':
     ensure  => running,
-    require => Exec['create_service']
+    require => Exec['splunk_service']
   }
   @concat { 'inputs.conf':
     path   => "${basedir}/etc/system/local/inputs.conf",
