@@ -5,7 +5,7 @@ mklauber/splunk is a puppet module for installing and configuring the splunk Ser
 It was created by Matthew Lauber.
 It is licensed under the Apache 2 License.
 
-[![Build Status](https://travis-ci.org/mklauber/puppet-splunk.png?branch=master)](https://travis-ci.org/mklauber/puppet-splunk)
+Build Status [![Build Status](https://travis-ci.org/mklauber/puppet-splunk.png?branch=master)](https://travis-ci.org/mklauber/puppet-splunk)
 
 ## Installation
 
