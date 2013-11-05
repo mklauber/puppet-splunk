@@ -8,14 +8,15 @@ define splunk::output::indexandforward (
   $selectiveIndexing = undef
 ) {
   include splunk
-  
+
+  # Validation for the inputs.
   if $index != undef {
     validate_bool($index)
   }
   if $selectiveIndexing != undef {
     validate_bool($selectiveIndexing)
   }
-  
+
   realize Concat['outputs.conf']
   concat::fragment { 'indexandforward':
     target  => 'outputs.conf',
