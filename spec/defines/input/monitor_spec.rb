@@ -20,7 +20,6 @@ describe 'splunk::input::monitor', :type => :define do
     }
     context 'without a path' do
       let (:params) {{}}
-      
       it {
         expect {
           should contain_file('#{concat_file}')
