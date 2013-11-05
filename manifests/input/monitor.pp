@@ -24,7 +24,7 @@ define splunk::input::monitor ( $path,
 ) {
   include splunk
 
-  $paths = any2array($path)
+  $_path = any2array($path)
 
   realize Concat['inputs.conf']
   concat::fragment { "monitor-${title}":

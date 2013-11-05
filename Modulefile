@@ -9,3 +9,4 @@ description 'A splunk module that manages the installation and configuration of 
 
 Inputs and outputs are configured as Resources.'
 dependency 'puppetlabs/concat', '>1.0.0'
+dependency 'puppetlabs/stdlib', ''

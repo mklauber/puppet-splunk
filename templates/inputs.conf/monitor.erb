@@ -1,4 +1,4 @@
-<% @paths.each do |p| %>[monitor://<%= p %>]
+<% @_path.each do |p| %>[monitor://<%= p %>]
 <% if @host %>  host = <%= @host %>
 <% end %><% if @index %>    index = <%= @index %>
 <% end %><% if @source %>    source = <%= @source %>
