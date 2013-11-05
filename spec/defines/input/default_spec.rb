@@ -7,8 +7,7 @@ describe 'splunk::input::default', :type => :define do
     
   describe 'When creating a default stanza' do
     it {
-      should contain_file('inputs.conf')
-        .with_path('/opt/splunk/etc/system/local/inputs.conf')
+      should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
       should contain_file(concat_file).with_content(/[default]/)
     }
     context "with host defined" do
