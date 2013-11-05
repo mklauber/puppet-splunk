@@ -1,0 +1,15 @@
+[batch://$path]
+    move_policy = sinkhole
+<% if @host %>    host = <%= @host %><% end -%>
+<% if @index %>    index = <%= @index %><% end -%>
+<% if @source %>    source = <%= @source %><% end -%>
+<% if @sourcetype %>    sourcetype = <%= @sourcetype %><% end -%>
+<% if @queue %>    queue = <%= @queue %><% end -%>
+<% if @host_regex %>    host_regex = <%= @host_regex %><% end -%>
+<% if @host_segment %>    host_segment = <%= @host_segment %><% end -%>
+<% if defined?(@recursive) %>    recursive = <%= @recursive %><% end -%>
+<% if @whitelist %>    whitelist = <%= @whitelist %><% end -%>
+<% if @blacklist %>    blacklist = <%= @blacklist %><% end -%>
+<% if @crcSalt %>    crcSalt = <%= @crcSalt %><% end -%>
+<% if @initCrcLength %>    initCrcLength = <%= @initCrcLength %><% end -%>
+<% if defined?(@followSymlink) %>    followSymlink = <%= @followSymlink %><% end -%>
