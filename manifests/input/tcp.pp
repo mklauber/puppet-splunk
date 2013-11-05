@@ -35,8 +35,7 @@ define splunk::input::tcp ( $port,
   if $listenOnIPv6 != undef {
     validate_re($listenOnIPv6, '^yes$|^no$|^only$')
   }
-  
-  
+
   realize Concat['inputs.conf']
   concat::fragment { "tcp-${title}":
     target  => 'inputs.conf',
