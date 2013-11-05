@@ -13,23 +13,21 @@ describe 'splunk::input::tcp', :type => :define do
   # Start the tests
   describe 'When creating a tcp stanza' do
     it {
-      should contain_file('inputs.conf')
-        .with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file("#{concat_file}")
-        .with_content(/[tcp:\/\/:#{port}]/)
+      should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
+      should contain_file(concat_file).with_content(/[tcp:\/\/:#{port}]/)
     }
     context 'without a port' do
     let (:params) {{}}
     it {
       expect {
-        should contain_file('#{concat_file}')
+        should contain_file(concat_file)
       }.to raise_error(Puppet::Error, /Must pass port to Splunk::Input::Tcp\[default\]/)
     }
   end
     context 'with $remote_server defined' do
       let (:params) {{ :port => port, :remote_server => 'example.com' }}
       it {
-        should contain_file("#{concat_file}").with_content(/[tcp:\/\/example.com:#{port}]/m)
+        should contain_file(concat_file).with_content(/[tcp:\/\/example.com:#{port}]/m)
       }
     end
     context 'with connection_host ' do
@@ -37,7 +35,7 @@ describe 'splunk::input::tcp', :type => :define do
         ['none', 'ip', 'dns'].each do |size|
           let (:params) {{:port => port, :connection_host => size }}
           it {
-            should contain_file("#{concat_file}").with_content(/[connection_host = #{size}]/m)
+            should contain_file(concat_file).with_content(/[connection_host = #{size}]/m)
           }
         end
       end
@@ -45,7 +43,7 @@ describe 'splunk::input::tcp', :type => :define do
         let (:params) {{:port => port, :connection_host => 'bad_input'}}
         it {
           expect {
-            should contain_file('#{concat_file}')
+            should contain_file(concat_file)
           }.to raise_error(Puppet::Error, /\"bad_input\" does not match \"\^none\$\|\^ip\$\|\^dns\$\"/)
         }
       end
@@ -55,7 +53,7 @@ describe 'splunk::input::tcp', :type => :define do
         ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
           let (:params) {{:port => port, :queueSize => size }}
           it {
-            should contain_file("#{concat_file}").with_content(/[queueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/[queueSize = #{size}]/m)
           }          
         end
       end
@@ -63,7 +61,7 @@ describe 'splunk::input::tcp', :type => :define do
         let (:params) {{:port => port, :queueSize => 'bad_input'}}
         it {
           expect {
-            should contain_file('#{concat_file}')
+            should contain_file(concat_file)
           }.to raise_error(Puppet::Error, /\"bad_input\" does not match \"\^\\\\d\+\(KB\|MB\|GB\)\$\"/)
         }
       end
@@ -73,7 +71,7 @@ describe 'splunk::input::tcp', :type => :define do
         ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
           let (:params) {{:port => port, :persistentQueueSize => size }}
           it {
-            should contain_file("#{concat_file}").with_content(/[persistentQueueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/[persistentQueueSize = #{size}]/m)
           }          
         end
       end
@@ -81,7 +79,7 @@ describe 'splunk::input::tcp', :type => :define do
         let (:params) {{:port => port, :persistentQueueSize => 'bad_input'}}
         it {
           expect {
-            should contain_file('#{concat_file}')
+            should contain_file(concat_file)
           }.to raise_error(Puppet::Error, /\"bad_input\" does not match \"\^\\\\d\+\(KB\|MB\|GB\|TB\)\$\"/)
         }
       end
@@ -91,7 +89,7 @@ describe 'splunk::input::tcp', :type => :define do
         ['yes', 'no', 'only'].each do |size|
           let (:params) {{:port => port, :listenOnIPv6 => size }}
           it {
-            should contain_file("#{concat_file}").with_content(/[listenOnIPv6 = #{size}]/m)
+            should contain_file(concat_file).with_content(/[listenOnIPv6 = #{size}]/m)
           }
         end
       end
@@ -99,7 +97,7 @@ describe 'splunk::input::tcp', :type => :define do
         let (:params) {{:port => port, :listenOnIPv6 => 'bad_input'}}
         it {
           expect {
-            should contain_file('#{concat_file}')
+            should contain_file(concat_file)
           }.to raise_error(Puppet::Error, /\"bad_input\" does not match \"\^yes\$\|\^no\$\|\^only\$\"/)
         }
       end
@@ -108,13 +106,13 @@ describe 'splunk::input::tcp', :type => :define do
       context 'to a single string' do
         let (:params) {{ :port => port, :acceptFrom => 'example.com' }}
         it {
-          should contain_file("#{concat_file}").with_content(/acceptFrom = example\.com/m)
+          should contain_file(concat_file).with_content(/acceptFrom = example\.com/m)
         }
       end
       context 'to an array' do
         let (:params) {{ :port => port, :acceptFrom => ['example.com', '10.0.2.3'] }}
         it {
-          should contain_file("#{concat_file}").with_content(/acceptFrom = example\.com, 10\.0\.2\.3/m)
+          should contain_file(concat_file).with_content(/acceptFrom = example\.com, 10\.0\.2\.3/m)
         }
       end
     end
@@ -136,19 +134,19 @@ describe 'splunk::input::tcp', :type => :define do
         :rawTcpDoneTimeout    => 10
       }}
       it {
-        should contain_file("#{concat_file}").with_content(/[tcp:\/\/remote\.server:#{port}]/m)
-        should contain_file("#{concat_file}").with_content(/host = host/m)
-        should contain_file("#{concat_file}").with_content(/index = index/m)
-        should contain_file("#{concat_file}").with_content(/source = source/m)
-        should contain_file("#{concat_file}").with_content(/sourcetype = sourcetype/m)
-        should contain_file("#{concat_file}").with_content(/queue = queue/m)
-        should contain_file("#{concat_file}").with_content(/connection_host = none/m)
-        should contain_file("#{concat_file}").with_content(/queueSize = 10KB/m)
-        should contain_file("#{concat_file}").with_content(/persistentQueueSize = 10TB/m)
-        should contain_file("#{concat_file}").with_content(/requireHeader = true/m)
-        should contain_file("#{concat_file}").with_content(/listenOnIPv6 = only/m)
-        should contain_file("#{concat_file}").with_content(/acceptFrom = 10.0.2.3/m)
-        should contain_file("#{concat_file}").with_content(/rawTcpDoneTimeout = 10/m)
+        should contain_file(concat_file).with_content(/[tcp:\/\/remote\.server:#{port}]/m)
+        should contain_file(concat_file).with_content(/host = host/m)
+        should contain_file(concat_file).with_content(/index = index/m)
+        should contain_file(concat_file).with_content(/source = source/m)
+        should contain_file(concat_file).with_content(/sourcetype = sourcetype/m)
+        should contain_file(concat_file).with_content(/queue = queue/m)
+        should contain_file(concat_file).with_content(/connection_host = none/m)
+        should contain_file(concat_file).with_content(/queueSize = 10KB/m)
+        should contain_file(concat_file).with_content(/persistentQueueSize = 10TB/m)
+        should contain_file(concat_file).with_content(/requireHeader = true/m)
+        should contain_file(concat_file).with_content(/listenOnIPv6 = only/m)
+        should contain_file(concat_file).with_content(/acceptFrom = 10.0.2.3/m)
+        should contain_file(concat_file).with_content(/rawTcpDoneTimeout = 10/m)
       }
     end
 

@@ -13,10 +13,8 @@ describe 'splunk::input::monitor', :type => :define do
   # Start the tests
   describe 'When creating a monitor stanza' do
     it {
-      should contain_file('inputs.conf')
-        .with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file("#{concat_file}")
-        .with_content(/[monitor:\/\/#{Regexp.escape(path)}]/)
+      should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
+      should contain_file("#{concat_file}").with_content(/[monitor:\/\/#{Regexp.escape(path)}]/)
     }
     context 'without a path' do
       let (:params) {{}}
@@ -29,9 +27,8 @@ describe 'splunk::input::monitor', :type => :define do
     context 'with an array of paths' do
       let (:params) {{ :path => ['/var/log/test', '/var/log/test2'] }}
       it {
-        should contain_file("#{concat_file}")
-          .with_content(/[monitor:\/\/\/var\/log\/test]/)
-          .with_content(/[monitor:\/\/\/var\/log\/test2]/)
+        should contain_file("#{concat_file}").with_content(/[monitor:\/\/\/var\/log\/test]/)
+        should contain_file("#{concat_file}").with_content(/[monitor:\/\/\/var\/log\/test2]/)
       }
     end
     context 'with recursive set to false' do
