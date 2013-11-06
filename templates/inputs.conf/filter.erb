@@ -1,0 +1,4 @@
+[filter:<%= @filtertype %>:<%= @filtername %>]
+<% @_regex.each_with_index do |item, index| -%>
+    regex<%= index+1 %>=<%= item %>
+<% end -%>
