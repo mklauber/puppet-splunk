@@ -1,0 +1,14 @@
+[fschange:<%= @pathh %>]
+<% if @index %>    index = <%= @index %><% end -%>
+<% if defined?(@signedaudit) %>    signedaudit = <%= @signedaudit %><% end -%>
+<% if @filters %>    filters = <%= @_filters.join", " %><% end -%>
+<% if defined?(@recurse) %>    recurse = <%= @recurse %><% end -%>
+<% if defined?(@followLinks) %>    followLinks = <%= @followLinks %><% end -%>
+<% if @pollPeriod %>    pollPeriod = <%= @pollPeriod %><% end -%>
+<% if @hashMaxSize %>    hashMaxSize = <%= @hashMaxSize %><% end -%>
+<% if defined?(@fullEvent) %>    fullEvent = <%= @fullEvent %><% end -%>
+<% if @sendEventMaxSize %>    sendEventMaxSize = <%= @sendEventMaxSize %><% end -%>
+<% if @sourcetype %>    sourcetype = <%= @sourcetype %><% end -%>
+<% if @host %>    host = <%= @host %><% end -%>
+<% if @filesPerDelay %>    filesPerDelay = <%= @filesPerDelay %><% end -%>
+<% if @delayInMills %>    delayInMills = <%= @delayInMills %><% end -%>
