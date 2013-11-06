@@ -11,8 +11,6 @@ define splunk::input::winprintmon ( $name,
 ) {
   include splunk
 
-  $_path = any2array($path)
-
   # Field Validations
   if $baseline != undef and ($baseline != 0 and $baseline != 1) {
     fail('\$baseline is not in [0|1].')
