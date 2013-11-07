@@ -3,7 +3,7 @@
 # Based on the inputs.conf.spec.  See at:
 # (http://docs.splunk.com/Documentation/Splunk/6.0/admin/Inputsconf)
 
-define splunk::input::perfmon ( $name, $object, $counters, 
+define splunk::input::perfmon ( $name, $object, $counters,
   $instances        = undef,
   $interval         = undef,
   $mode             = undef,
