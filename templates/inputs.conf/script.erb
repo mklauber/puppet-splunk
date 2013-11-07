@@ -1,0 +1,7 @@
+[script://<%= @cmd %>]
+<% if @interval %>    interval = <%= @interval %><% end -%>
+<% if @passAuth %>    passAuth = <%= @passAuth %><% end -%>
+<% if @queueSize %>    queueSize = <%= @queueSize %><% end -%>
+<% if @persistentQueueSize %>    persistentQueueSize = <%= @persistentQueueSize %><% end -%>
+<% if @index %>    index = <%= @index %><% end -%>
+<% if defined?(@start_by_shell) %>    start_by_shell = <%= @start_by_shell %><% end -%>
