@@ -1,0 +1,12 @@
+[splunktcp<% if @port -%>://<%= $remote_server %>:<%= $port %><% end -%>]
+<% if @inputShutdownTimeout %>    inputShutdownTimeout = <%= @inputShutdownTimeout %><% end -%>
+<% if @listenOnIPv6 %>    listenOnIPv6 = <%= @listenOnIPv6 %><% end -%>
+<% if @acceptFrom %>    acceptFrom = <%= @_acceptFrom.join(', ') %><% end -%>
+<% if @port %>    port = <%= @port %><% end -%>
+<% if @connection_host %>    connection_host = <%= @connection_host %><% end -%>
+<% if defined?(@compressed) %>    compressed = <%= @compressed %><% end -%>
+<% if @queueSize %>    queueSize = <%= @queueSize %><% end -%>
+<% if defined?(@enableS2SHeartbeat) %>    enableS2SHeartbeat = <%= @enableS2SHeartbeat %><% end -%>
+<% if @s2sHeartbeatTimeout %>    s2sHeartbeatTimeout = <%= @s2sHeartbeatTimeout %><% end -%>
+<% if defined?(@negotiateNewProtocol) %>    negotiateNewProtocol = <%= @negotiateNewProtocol %><% end -%>
+<% if @concurrentChannelList %>    concurrentChannelList = <%= @concurrentChannelList %><% end -%>
