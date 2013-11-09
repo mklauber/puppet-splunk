@@ -1,0 +1,12 @@
+[WinEventLog://$name]
+<% if @start_from %>    start_from = <%= @start_from %><% end -%>
+<% if @current_only %>    current_only = <%= @current_only %><% end -%>
+<% if @checkpointInterval %>    checkpointInterval = <%= @checkpointInterval %><% end -%>
+<% if @disabled %>    disabled = <%= @disabled %><% end -%>
+<% if @evt_resolve_ad_obj %>    evt_resolve_ad_obj = <%= @evt_resolve_ad_obj %><% end -%>
+<% if @evt_dc_name %>    evt_dc_name = <%= @evt_dc_name %><% end -%>
+<% if @evt_dns_name %>    evt_dns_name = <%= @evt_dns_name %><% end -%>
+<% if @index %>    index = <%= @index %><% end -%>
+<% if @whitelist %>    whitelist = <%= @_whitelist.join(';') %><% end -%>
+<% if @blacklist %>    blacklist = <%= @_blacklist.join(';') %><% end -%>
+<% if @suppress_text %>    suppress_text = <%= @suppress_text %><% end -%>
