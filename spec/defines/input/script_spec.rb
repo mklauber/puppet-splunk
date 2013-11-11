@@ -14,7 +14,7 @@ describe 'splunk::input::script', :type => :define do
   describe 'When creating a [script] stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[script:\/\/#{cmd}]/)
+      should contain_file(concat_file).with_content(/\[script:\/\/#{Regexp.escape(cmd)}\]/)
     }
     context 'without a cmd' do
       let (:params) {{}}
@@ -45,11 +45,11 @@ describe 'splunk::input::script', :type => :define do
       end
     end
     context 'with queueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:cmd => cmd, :queueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[queueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/queueSize = #{size}/m)
           }          
         end
       end
@@ -63,11 +63,11 @@ describe 'splunk::input::script', :type => :define do
       end
     end
     context 'with persistentQueueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:cmd => cmd, :persistentQueueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[persistentQueueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/persistentQueueSize = #{size}/m)
           }          
         end
       end

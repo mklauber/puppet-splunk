@@ -14,7 +14,7 @@ describe 'splunk::input::tcp', :type => :define do
   describe 'When creating a tcp stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[tcp:\/\/:#{port}]/)
+      should contain_file(concat_file).with_content(/\[tcp:\/\/:#{port}\]/)
     }
     context 'without a port' do
     let (:params) {{}}
@@ -27,15 +27,15 @@ describe 'splunk::input::tcp', :type => :define do
     context 'with $remote_server defined' do
       let (:params) {{ :port => port, :remote_server => 'example.com' }}
       it {
-        should contain_file(concat_file).with_content(/[tcp:\/\/example.com:#{port}]/m)
+        should contain_file(concat_file).with_content(/\[tcp:\/\/example.com:#{port}\]/m)
       }
     end
     context 'with connection_host ' do
-      context 'set' do
-        ['none', 'ip', 'dns'].each do |size|
+      ['none', 'ip', 'dns'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:port => port, :connection_host => size }}
           it {
-            should contain_file(concat_file).with_content(/[connection_host = #{size}]/m)
+            should contain_file(concat_file).with_content(/connection_host = #{size}/m)
           }
         end
       end
@@ -49,11 +49,11 @@ describe 'splunk::input::tcp', :type => :define do
       end
     end
     context 'with queueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:port => port, :queueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[queueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/queueSize = #{size}/m)
           }          
         end
       end
@@ -67,11 +67,11 @@ describe 'splunk::input::tcp', :type => :define do
       end
     end
     context 'with persistentQueueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:port => port, :persistentQueueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[persistentQueueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/persistentQueueSize = #{size}/m)
           }          
         end
       end
@@ -85,11 +85,11 @@ describe 'splunk::input::tcp', :type => :define do
       end
     end
     context 'with listenOnIPv6 ' do
-      context 'set' do
-        ['yes', 'no', 'only'].each do |size|
+      ['yes', 'no', 'only'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:port => port, :listenOnIPv6 => size }}
           it {
-            should contain_file(concat_file).with_content(/[listenOnIPv6 = #{size}]/m)
+            should contain_file(concat_file).with_content(/listenOnIPv6 = #{size}/m)
           }
         end
       end
@@ -134,7 +134,7 @@ describe 'splunk::input::tcp', :type => :define do
         :rawTcpDoneTimeout    => 10
       }}
       it {
-        should contain_file(concat_file).with_content(/[tcp:\/\/remote\.server:#{port}]/m)
+        should contain_file(concat_file).with_content(/\[tcp:\/\/remote\.server:#{port}\]/m)
         should contain_file(concat_file).with_content(/host = host/m)
         should contain_file(concat_file).with_content(/index = index/m)
         should contain_file(concat_file).with_content(/source = source/m)

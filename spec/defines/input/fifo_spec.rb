@@ -11,10 +11,10 @@ describe 'splunk::input::fifo', :type => :define do
   let(:params){{ :path => path }}
 
   # Start the tests
-  describe 'When creating a tcp stanza' do
+  describe 'When creating a fifo stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[fifo:\/\/:#{path}]/)
+      should contain_file(concat_file).with_content(/\[fifo:\/\/#{Regexp.escape(path)}\]/)
     }
     context 'without a path' do
       let (:params) {{}}
@@ -25,11 +25,11 @@ describe 'splunk::input::fifo', :type => :define do
       }
     end
     context 'with queueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:path => path, :queueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[queueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/queueSize = #{size}/m)
           }          
         end
       end
@@ -43,11 +43,11 @@ describe 'splunk::input::fifo', :type => :define do
       end
     end
     context 'with persistentQueueSize' do
-      context 'in KB, MB, or GB' do
-        ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+      ['10KB', '20KB', '11MB', '21MB', '12GB', '22GB', '13TB', '23TB'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:path => path, :persistentQueueSize => size }}
           it {
-            should contain_file(concat_file).with_content(/[persistentQueueSize = #{size}]/m)
+            should contain_file(concat_file).with_content(/persistentQueueSize = #{size}/m)
           }          
         end
       end
@@ -67,7 +67,7 @@ describe 'splunk::input::fifo', :type => :define do
         :persistentQueueSize => '10TB'
       }}
       it {
-        should contain_file(concat_file).with_content(/[fifo:\/\/#{path}]/m)
+        should contain_file(concat_file).with_content(/\[fifo:\/\/#{path}\]/m)
         should contain_file(concat_file).with_content(/queueSize = 10KB/m)
         should contain_file(concat_file).with_content(/persistentQueueSize = 10TB/m)
       }

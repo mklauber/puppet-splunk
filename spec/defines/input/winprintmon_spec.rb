@@ -12,7 +12,7 @@ describe 'splunk::input::winprintmon', :type => :define do
   describe 'When creating a [WinPrintMon] stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[WinPrintMon:\/\/#{name}]/)
+      should contain_file(concat_file).with_content(/\[WinPrintMon:\/\/#{name}\]/)
     }
   end
   context "with baseline" do

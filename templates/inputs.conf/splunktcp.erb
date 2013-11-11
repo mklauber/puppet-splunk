@@ -1,4 +1,4 @@
-[splunktcp<% if @port -%>://<%= $remote_server %>:<%= $port %><% end -%>]
+[splunktcp<% if @port -%>://<%= @remote_server %>:<%= @port %><% end -%>]
 <% if @inputShutdownTimeout %>    inputShutdownTimeout = <%= @inputShutdownTimeout %><% end -%>
 <% if @listenOnIPv6 %>    listenOnIPv6 = <%= @listenOnIPv6 %><% end -%>
 <% if @acceptFrom %>    acceptFrom = <%= @_acceptFrom.join(', ') %><% end -%>

@@ -9,7 +9,7 @@ describe 'splunk::output::indexandforward', :type => :define do
     
     it {
       should contain_file('outputs.conf').with_path('/opt/splunk/etc/system/local/outputs.conf')
-      should contain_file(concat_file).with_content(/[indexAndForward]/)
+      should contain_file(concat_file).with_content(/\[indexAndForward\]/)
     }
   end
   context "with index" do
@@ -17,7 +17,7 @@ describe 'splunk::output::indexandforward', :type => :define do
       context "set to #{index}" do
         let(:params) {{ :index => index }}
         it {
-          should contain_file(concat_file).with_content(/[indexAndForward].*index = #{index}/m)
+          should contain_file(concat_file).with_content(/\[indexAndForward\].*index = #{index}/m)
         }
       end
     end
@@ -37,7 +37,7 @@ describe 'splunk::output::indexandforward', :type => :define do
       context "set to #{index}" do
         let(:params) {{ :selectiveIndexing => index }}
         it {
-          should contain_file(concat_file).with_content(/[indexAndForward].*selectiveIndexing = #{index}/m)
+          should contain_file(concat_file).with_content(/\[indexAndForward\].*selectiveIndexing = #{index}/m)
         }
       end
     end

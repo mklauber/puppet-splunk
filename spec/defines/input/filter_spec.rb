@@ -16,10 +16,10 @@ describe 'splunk::input::filter', :type => :define do
   }}
 
   # Start the tests
-  describe 'When creating a monitor stanza' do
+  describe 'When creating a filter stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[filter:#{type}:#{name}]/)
+      should contain_file(concat_file).with_content(/\[filter:#{type}:#{name}\]/)
       should contain_file(concat_file).with_content(/regex1=\/regex string\//)
     }
     context 'without a filtertype' do
@@ -66,20 +66,20 @@ describe 'splunk::input::filter', :type => :define do
       }
     end
     context 'with filtertype' do
-      context 'in [whitelist|blacklist]' do
-        ['whitelist', 'blacklist'].each do |filtertype|
+      ['whitelist', 'blacklist'].each do |filtertype|
+        context 'set to #{filtertype}' do
           let(:params){{ 
             :filtertype => filtertype, 
             :filtername => name,
             :regex => '/regex string/'
           }}
           it {
-            should contain_file(concat_file).with_content(/[filter:#{filtertype}:#{name}]/m)
+            should contain_file(concat_file).with_content(/filter:#{filtertype}:#{name}/m)
           }          
         end
       end
-      context 'not in [whitelist|blacklist]' do
-        [9999, 'thingie'].each do |filtertype|
+      [9999, 'thingie'].each do |filtertype|
+        context 'set to #{filtertype}' do
           let(:params){{
             :filtertype => filtertype, 
             :filtername => name,

@@ -1,4 +1,4 @@
-[perfmon://$name]
+[perfmon://<%= @name -%>]
 <% if @object %>    object = <%= @object %><% end -%>
 <% if @_counters %>    counters = <%= @_counters.join(';') %><% end -%>
 <% if @_instances %>    instances = <%= @_instances.join(';') %><% end -%>

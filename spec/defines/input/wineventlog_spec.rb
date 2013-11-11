@@ -13,7 +13,7 @@ describe 'splunk::input::wineventlog', :type => :define do
     context 'with $name defined' do
       it {
         should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-        should contain_file(concat_file).with_content(/[WinEventLog:\/\/#{name}]/)
+        should contain_file(concat_file).with_content(/\[WinEventLog:\/\/#{name}\]/)
       }
     end
     context 'without a name' do

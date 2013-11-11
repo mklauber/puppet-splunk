@@ -1,4 +1,4 @@
-[batch://$path]
+[batch://<%= @path -%>]
     move_policy = sinkhole
 <% if @host %>    host = <%= @host %><% end -%>
 <% if @index %>    index = <%= @index %><% end -%>

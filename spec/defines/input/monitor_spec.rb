@@ -14,7 +14,7 @@ describe 'splunk::input::monitor', :type => :define do
   describe 'When creating a monitor stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file("#{concat_file}").with_content(/[monitor:\/\/#{Regexp.escape(path)}]/)
+      should contain_file("#{concat_file}").with_content(/\[monitor:\/\/#{Regexp.escape(path)}\]/)
     }
     context 'without a path' do
       let (:params) {{}}
@@ -27,8 +27,8 @@ describe 'splunk::input::monitor', :type => :define do
     context 'with an array of paths' do
       let (:params) {{ :path => ['/var/log/test', '/var/log/test2'] }}
       it {
-        should contain_file("#{concat_file}").with_content(/[monitor:\/\/\/var\/log\/test]/)
-        should contain_file("#{concat_file}").with_content(/[monitor:\/\/\/var\/log\/test2]/)
+        should contain_file("#{concat_file}").with_content(/\[monitor:\/\/\/var\/log\/test\]/)
+        should contain_file("#{concat_file}").with_content(/\[monitor:\/\/\/var\/log\/test2\]/)
       }
     end
     context 'with recursive set to false' do
@@ -45,7 +45,7 @@ describe 'splunk::input::monitor', :type => :define do
     end
     context 'with all the parameters defined' do
       let(:params){{
-        :path               => 'path',
+        :path               => path,
         :host               => 'host',
         :index              => 'index',
         :source             => 'source',
@@ -65,7 +65,7 @@ describe 'splunk::input::monitor', :type => :define do
         :followSymlink      => false
       }}
       it {
-        should contain_file("#{concat_file}").with_content(/[monitor:\/\/#{Regexp.escape(path)}]/m)
+        should contain_file("#{concat_file}").with_content(/\[monitor:\/\/#{Regexp.escape(path)}\]/m)
         should contain_file("#{concat_file}").with_content(/host = host/m)
         should contain_file("#{concat_file}").with_content(/index = index/m)
         should contain_file("#{concat_file}").with_content(/source = source/m)

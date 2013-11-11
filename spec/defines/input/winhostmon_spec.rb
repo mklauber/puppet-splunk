@@ -44,5 +44,19 @@ describe 'splunk::input::winhostmon', :type => :define do
         end
       end
     end
+    context 'with $type set' do
+      context 'to a single string' do
+        let (:params) {{ :name => name, :type => 'example.com' }}
+        it {
+          should contain_file(concat_file).with_content(/type = example\.com/m)
+        }
+      end
+      context 'to an array' do
+        let (:params) {{ :name => name, :type => ['example.com', '10.0.2.3'] }}
+        it {
+          should contain_file(concat_file).with_content(/type = example\.com;10\.0\.2\.3/m)
+        }
+      end
+    end
   end
 end

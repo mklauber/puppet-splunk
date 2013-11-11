@@ -14,7 +14,7 @@ describe 'splunk::input::tcpssl', :type => :define do
   describe 'When creating a tcp stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[tcp-ssl:#{port}]/)
+      should contain_file(concat_file).with_content(/\[tcp-ssl:#{port}\]/)
     }
     context 'without a port' do
       let (:params) {{}}

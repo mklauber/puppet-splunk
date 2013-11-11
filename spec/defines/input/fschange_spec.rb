@@ -14,7 +14,7 @@ describe 'splunk::input::fschange', :type => :define do
   describe 'When creating a [fschange] stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[fschange:#{Regexp.escape(path)}]/)
+      should contain_file(concat_file).with_content(/\[fschange:#{Regexp.escape(path)}\]/)
     }
     context 'without a path' do
       let (:params) {{}}

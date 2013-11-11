@@ -1,4 +1,4 @@
-[splunktcp-ssl:<%= $port %>]
+[splunktcp-ssl:<%= @port %>]
 <% if @listenOnIPv6 %>    listenOnIPv6 = <%= @listenOnIPv6 %><% end -%>
 <% if @acceptFrom %>    acceptFrom = <%= @_acceptFrom.join(', ') %><% end -%>
 <% if @connection_host %>    connection_host = <%= @connection_host %><% end -%>

@@ -15,7 +15,7 @@ describe 'splunk::input::splunkssl', :type => :define do
     context 'without a port' do
       it {
         should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-        should contain_file(concat_file).with_content(/[splunktcp-ssl:#{port}]/)
+        should contain_file(concat_file).with_content(/\[splunktcp-ssl:#{port}\]/)
       }
     end
     context 'without a port' do
@@ -27,11 +27,11 @@ describe 'splunk::input::splunkssl', :type => :define do
       }
     end
     context 'with connection_host ' do
-      context 'set' do
-        ['none', 'ip', 'dns'].each do |size|
+      ['none', 'ip', 'dns'].each do |size|
+        context 'set to #{size}' do
           let (:params) {{:port => port, :connection_host => size }}
           it {
-            should contain_file(concat_file).with_content(/[connection_host = #{size}]/m)
+            should contain_file(concat_file).with_content(/connection_host = #{size}/m)
           }
         end
       end
@@ -45,11 +45,11 @@ describe 'splunk::input::splunkssl', :type => :define do
       end
     end
     context 'with listenOnIPv6 ' do
-      context 'set' do
-        ['yes', 'no', 'only'].each do |size|
-          let (:params) {{:port => port, :listenOnIPv6 => size }}
+      ['yes', 'no', 'only'].each do |listen|
+        context 'set to #{listen}' do
+          let (:params) {{:port => port, :listenOnIPv6 => listen }}
           it {
-            should contain_file(concat_file).with_content(/[listenOnIPv6 = #{size}]/m)
+            should contain_file(concat_file).with_content(/listenOnIPv6 = #{listen}/m)
           }
         end
       end

@@ -18,7 +18,7 @@ describe 'splunk::input::perfmon', :type => :define do
   describe 'When creating a [perfmon] stanza' do
     it {
       should contain_file('inputs.conf').with_path('/opt/splunk/etc/system/local/inputs.conf')
-      should contain_file(concat_file).with_content(/[perfmon:\/\/#{name}]/m)
+      should contain_file(concat_file).with_content(/\[perfmon:\/\/#{name}\]/m)
       should contain_file(concat_file).with_content(/object = #{object}/m)
       should contain_file(concat_file).with_content(/counters = #{counter}/m)
     }
