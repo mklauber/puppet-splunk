@@ -26,7 +26,6 @@ define splunk::input::winnetmon ( $name,
   $_packetType    = any2array($packetType)
   $_direction     = any2array($direction)
   $_protocol      = any2array($protocol)
-  
 
   # Field Validations
   if $disabled != undef and ($disabled != 0 and $disabled != 1) {
