@@ -1,0 +1,16 @@
+[WinNetMon://<%= @name -%>]
+<% if @remoteAddress %>    remoteAddress = <%= @remoteAddress %><% end -%>
+<% if @process %>    process = <%= @process %><% end -%>
+<% if @user %>    user = <%= @user %><% end -%>
+<% if @addressFamily %>    addressFamily = <%= @_addressFamily.join(';') %><% end -%>
+<% if @packetType %>    packetType = <%= @_packetType.join(';') %><% end -%>
+<% if @direction %>    direction = <%= @_direction.join(';') %><% end -%>
+<% if @protocol %>    protocol = <%= @_protocol.join(';') %><% end -%>
+<% if @readInterval %>    readInterval = <%= @readInterval %><% end -%>
+<% if @driverBufferSize %>    driverBufferSize = <%= @driverBufferSize %><% end -%>
+<% if @userBufferSize %>    userBufferSize = <%= @userBufferSize %><% end -%>
+<% if @mode %>    mode = <%= @mode %><% end -%>
+<% if @multikvMaxEventCount %>    multikvMaxEventCount = <%= @multikvMaxEventCount %><% end -%>
+<% if @multikvMaxTimeMs %>    multikvMaxTimeMs = <%= @multikvMaxTimeMs %><% end -%>
+<% if @disabled %>    disabled = <%= @disabled %><% end -%>
+<% if @index %>    index = <%= @index %><% end -%>
