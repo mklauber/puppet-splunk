@@ -1,0 +1,5 @@
+[WinHostMon://<%= @name -%>]
+<% if @type %>    type = <%= @_type.join(';') %><% end -%>
+<% if @interval %>    interval = <%= @interval %><% end -%>
+<% if @disabled %>    disabled = <%= @disabled %><% end -%>
+<% if @index %>    index = <%= @index %><% end -%>
