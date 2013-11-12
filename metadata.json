@@ -1,6 +1,6 @@
 {
   "name": "mklauber-splunk",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "summary": "A puppet module for managing splunk servers and forwarders.",
   "author": "Matthew Lauber",
   "description": "A splunk module that manages the installation and configuration of splunk servers and splunk Universal Forwarders.  \n\nInputs and outputs are configured as Resources.",
