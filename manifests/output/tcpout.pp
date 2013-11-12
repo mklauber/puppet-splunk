@@ -42,10 +42,11 @@ define splunk::output::tcpout (
 ) {
   include splunk
 
+  $_defaultGroup = any2array($defaultGroup)
+  # Field Validation
   if $indexAndForward != undef {
     require Package['splunk']
   }
-
     # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
   if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
     fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
