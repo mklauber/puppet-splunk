@@ -4,8 +4,7 @@
 # (http://docs.splunk.com/Documentation/Splunk/6.0/admin/Outputsconf)
 
 
-define splunk::output::tcpServer ( $ip_address,
-  $port,
+define splunk::output::tcpserver ( $ip_address, $port,
   #----Common Settings----
   $sendCookedData              = undef,
   $heartbeatFrequency          = undef,
@@ -42,10 +41,36 @@ define splunk::output::tcpServer ( $ip_address,
 ) {
   include splunk
 
+  # Field Validation
+  if $sendCookedData != undef {
+    validate_bool($sendCookedData)
+  }
+  if $blockOnCloning != undef {
+    validate_bool($blockOnCloning)
+  }
+  if $compressed != undef {
+    validate_bool($compressed)
+  }
+  if $negotiateNewProtocol != undef {
+    validate_bool($negotiateNewProtocol)
+  }
+  if $forceTimebasedAutoLB != undef {
+    validate_bool($forceTimebasedAutoLB)
+  }
+  if $sslVerifyServerCert != undef {
+    validate_bool($sslVerifyServerCert)
+  }
   # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
   if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
     fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
   }
+  if $useClientSSLCompression != undef {
+    validate_bool($useClientSSLCompression)
+  }
+  if $useACK != undef {
+    validate_bool($useACK)
+  }
+
 
   realize Concat['outputs.conf']
   concat::fragment { "tcpServer-${title}":

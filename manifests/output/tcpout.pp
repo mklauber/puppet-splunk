@@ -43,13 +43,38 @@ define splunk::output::tcpout (
   include splunk
 
   $_defaultGroup = any2array($defaultGroup)
+
   # Field Validation
   if $indexAndForward != undef {
     require Package['splunk']
   }
-    # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
+  if $sendCookedData != undef {
+    validate_bool($sendCookedData)
+  }
+  if $blockOnCloning != undef {
+    validate_bool($blockOnCloning)
+  }
+  if $compressed != undef {
+    validate_bool($compressed)
+  }
+  if $negotiateNewProtocol != undef {
+    validate_bool($negotiateNewProtocol)
+  }
+  if $forceTimebasedAutoLB != undef {
+    validate_bool($forceTimebasedAutoLB)
+  }
+  if $sslVerifyServerCert != undef {
+    validate_bool($sslVerifyServerCert)
+  }
+  # sslVerifyServerCert requires sslCommonName to Check and sslAltNameToCheck
   if $sslVerifyServerCert != undef and ($sslCommonNameToCheck == undef or $sslAltNameToCheck == undef) {
     fail( '$sslVerifyServerCert requires $sslCommonNameToCheck and $sslAltNameToCheck to be set')
+  }
+  if $useClientSSLCompression != undef {
+    validate_bool($useClientSSLCompression)
+  }
+  if $useACK != undef {
+    validate_bool($useACK)
   }
 
   realize Concat['outputs.conf']
