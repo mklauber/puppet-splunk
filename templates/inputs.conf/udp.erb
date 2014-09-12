@@ -1,14 +1,15 @@
 [udp://<%= @remote_server %>:<%= @port %>]
-<% if @host %>    host = <%= @host %><% end -%>
-<% if @index %>    index = <%= @index %><% end -%>
-<% if @source %>    source = <%= @source %><% end -%>
-<% if @sourcetype %>    sourcetype = <%= @sourcetype %><% end -%>
-<% if @queue %>    queue = <%= @queue %><% end -%>
-<% if @connection_host %>    connection_host = <%= @connection_host %><% end -%>
-<% if @rcvbuf %>    _rcvbuf = <%= @rcvbuf %><% end -%>
-<% if defined?(@no_priority_stripping) %>    no_priority_stripping = <%= @no_priority_stripping %><% end -%>
-<% if defined?(@no_appending_timestamp) %>    no_appending_timestamp = <%= @no_appending_timestamp %><% end -%>
-<% if @queueSize %>    queueSize = <%= @queueSize %><% end -%>
-<% if @persistentQueueSize %>    persistentQueueSize = <%= @persistentQueueSize %><% end -%>
-<% if @listenOnIPv6 %>    listenOnIPv6 = <%= @listenOnIPv6 %><% end -%>
-<% if @acceptFrom %>    acceptFrom = <%= @_acceptFrom.join(', ') %><% end -%>
+<% if @host %>    host = <%= @host %>
+<% end %><% if @index %>    index = <%= @index %>
+<% end %><% if @source %>    source = <%= @source %>
+<% end %><% if @sourcetype %>    sourcetype = <%= @sourcetype %>
+<% end %><% if @queue %>    queue = <%= @queue %>
+<% end %><% if @connection_host %>    connection_host = <%= @connection_host %>
+<% end %><% if @rcvbuf %>    _rcvbuf = <%= @rcvbuf %>
+<% end %><% if defined?(@no_priority_stripping) %>    no_priority_stripping = <%= @no_priority_stripping %>
+<% end %><% if defined?(@no_appending_timestamp) %>    no_appending_timestamp = <%= @no_appending_timestamp %>
+<% end %><% if @queueSize %>    queueSize = <%= @queueSize %>
+<% end %><% if @persistentQueueSize %>    persistentQueueSize = <%= @persistentQueueSize %>
+<% end %><% if @listenOnIPv6 %>    listenOnIPv6 = <%= @listenOnIPv6 %>
+<% end %><% if @acceptFrom %>    acceptFrom = <%= @_acceptFrom.join(', ') %>
+<% end %>
